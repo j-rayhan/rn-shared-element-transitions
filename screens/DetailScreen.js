@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text, View, ScrollView, Image, Dimensions } from 'react-native';
 import { SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { SharedElement } from 'react-navigation-shared-element';
 const { height } = Dimensions.get('window');
 const ITEM_HEIGHT = height * 0.5;
 
@@ -8,16 +9,18 @@ const DetailScreen = ({ navigation, route }) => {
   const { item } = route.params;
   return (
     <View style={{ flex: 1, backgroundColor: '#0f0f0f' }}>
-      <Image
-        source={{ uri: item.image_url }}
-        style={{
-          width: '100%',
-          height: ITEM_HEIGHT,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
-        }}
-        resizeMode='cover'
-      />
+      <SharedElement id={`item.${item.id}.image_url`}>
+        <Image
+          source={{ uri: item.image_url }}
+          style={{
+            width: '100%',
+            height: ITEM_HEIGHT,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          }}
+          resizeMode='cover'
+        />
+      </SharedElement>
       <MaterialCommunityIcons
         name='close'
         size={28}
@@ -102,5 +105,15 @@ const DetailScreen = ({ navigation, route }) => {
       </ScrollView>
     </View>
   );
+};
+DetailScreen.sharedElements = (route) => {
+  const { item } = route.params;
+  return [
+    {
+      id: `item.${item.id}.image_url`,
+      animation: 'move',
+      resize: 'clip',
+    },
+  ];
 };
 export default DetailScreen;

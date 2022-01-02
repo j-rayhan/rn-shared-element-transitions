@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { SharedElement } from 'react-navigation-shared-element';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { data } from '../config/data';
 const { width } = Dimensions.get('screen');
@@ -28,15 +29,17 @@ export default function HomeScreen({ navigation }) {
               style={{ marginBottom: 14 }}
               onPress={() => navigation.navigate('DetailScreen', { item })}
             >
-              <Image
-                style={{
-                  borderRadius: 14,
-                  width: ITEM_WIDTH,
-                  height: ITEM_HEIGHT,
-                }}
-                source={{ uri: item.image_url }}
-                resizeMode='cover'
-              />
+              <SharedElement id={`item.${item.id}.image_url`}>
+                <Image
+                  style={{
+                    borderRadius: 14,
+                    width: ITEM_WIDTH,
+                    height: ITEM_HEIGHT,
+                  }}
+                  source={{ uri: item.image_url }}
+                  resizeMode='cover'
+                />
+              </SharedElement>
               <View
                 style={{
                   position: 'absolute',
