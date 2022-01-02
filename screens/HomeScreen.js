@@ -48,32 +48,40 @@ export default function HomeScreen({ navigation }) {
                 }}
               >
                 <View style={{ flexDirection: 'row' }}>
-                  <SimpleLineIcons
-                    size={40}
-                    color='white'
-                    name={item.iconName}
-                  />
+                  {/* // Icon */}
+                  <SharedElement id={`item.${item.id}.iconName`}>
+                    <SimpleLineIcons
+                      size={40}
+                      color='white'
+                      name={item.iconName}
+                    />
+                  </SharedElement>
+                  {/* //Title */}
                   <View style={{ flexDirection: 'column', paddingLeft: 6 }}>
-                    <Text
-                      style={{
-                        color: 'white',
-                        fontSize: 24,
-                        fontWeight: 'bold',
-                        lineHeight: 28,
-                      }}
-                    >
-                      {item.title}
-                    </Text>
-                    <Text
-                      style={{
-                        color: 'white',
-                        fontSize: 16,
-                        fontWeight: 'bold',
-                        lineHeight: 18,
-                      }}
-                    >
-                      {item.description}
-                    </Text>
+                    <SharedElement id={`item.${item.id}.title`}>
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontSize: 24,
+                          fontWeight: 'bold',
+                          lineHeight: 28,
+                        }}
+                      >
+                        {item.title}
+                      </Text>
+                    </SharedElement>
+                    <SharedElement id={`item.${item.id}.description`}>
+                      <Text
+                        style={{
+                          color: 'white',
+                          fontSize: 16,
+                          fontWeight: 'bold',
+                          lineHeight: 18,
+                        }}
+                      >
+                        {item.description}
+                      </Text>
+                    </SharedElement>
                   </View>
                 </View>
               </View>

@@ -38,28 +38,34 @@ const DetailScreen = ({ navigation, route }) => {
       <View
         style={{ flexDirection: 'row', marginTop: 10, paddingHorizontal: 20 }}
       >
-        <SimpleLineIcons size={40} color='white' name={item.iconName} />
+        <SharedElement id={`item.${item.id}.iconName`}>
+          <SimpleLineIcons size={40} color='white' name={item.iconName} />
+        </SharedElement>
         <View style={{ flexDirection: 'column', paddingLeft: 6 }}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 24,
-              fontWeight: 'bold',
-              lineHeight: 28,
-            }}
-          >
-            {item.title}
-          </Text>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 16,
-              fontWeight: 'bold',
-              lineHeight: 18,
-            }}
-          >
-            {item.description}
-          </Text>
+          <SharedElement id={`item.${item.id}.title`}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 24,
+                fontWeight: 'bold',
+                lineHeight: 28,
+              }}
+            >
+              {item.title}
+            </Text>
+          </SharedElement>
+          <SharedElement id={`item.${item.id}.description`}>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 16,
+                fontWeight: 'bold',
+                lineHeight: 18,
+              }}
+            >
+              {item.description}
+            </Text>
+          </SharedElement>
         </View>
       </View>
       <ScrollView
@@ -111,6 +117,21 @@ DetailScreen.sharedElements = (route) => {
   return [
     {
       id: `item.${item.id}.image_url`,
+      animation: 'move',
+      resize: 'clip',
+    },
+    {
+      id: `item.${item.id}.title`,
+      animation: 'fade',
+      resize: 'clip',
+    },
+    {
+      id: `item.${item.id}.description`,
+      animation: 'fade',
+      resize: 'clip',
+    },
+    {
+      id: `item.${item.id}.iconName`,
       animation: 'move',
       resize: 'clip',
     },
